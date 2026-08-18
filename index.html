@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Unbounded:wght@600;700;800&family=Yeseva+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/p2.css?v=48">
+<link rel="stylesheet" href="css/p2.css?v=51">
 <link rel="preload" as="image" href="img/hero-mobile.webp?v=2" media="(max-width:640px)" fetchpriority="high">
 <link rel="preload" as="image" href="img/hero.webp?v=2" media="(min-width:641px)" fetchpriority="high">
 <!-- SEO -->
@@ -38,7 +38,7 @@
 <link rel="icon" href="/favicon.ico?v=5" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5">
 <link rel="manifest" href="/site.webmanifest?v=5">
-<meta name="theme-color" content="#ff3b30">
+<meta name="theme-color" content="#ff4b3b">
 <!-- /Favicon -->
 </head>
 <body>
@@ -65,9 +65,12 @@
 
 <!-- ABOUT -->
 <section class="about" id="o-nas">
+  <div class="about__inner">
+    <div class="about__logo" data-parallax="9"><img src="img/logo-white.png?v=2" alt="Bull Bike" width="512" height="512" loading="lazy" decoding="async"></div>
   <p class="about__text" data-parallax="5">
     <b>Bull Bike</b> — мы не сдаём<br class="mb"> технику. Мы выдаём<br class="hb"> <em>заряд<br class="mb"> энергии</em> на целый сезон.<br class="mb"> Ты приезжаешь уставшим<br class="hb"><br class="mb"> от города и рутины —<br class="mb"> а уезжаешь<br class="hb"> с горящими<br class="mb"> глазами, полным телефоном<br class="hb"><br class="mb"> видео и эмоциями,<br class="mb"> которые<br class="hb"> обсуждают<br class="mb"> неделями.<br class="hb"><br class="mb"> Эндуро и квадроциклы,<br class="mb"> сноубайки зимой,<br class="hb"> SAP и лодки<br class="mb"> летом — круглый год есть чем<br class="mb"> удивить<br class="hb"> себя. Экипировка,<br class="mb"> инструктаж и хорошее настроение — включены.
   </p>
+  </div>
 </section>
 
 <!-- FEATURES -->
@@ -105,7 +108,7 @@
   <p class="sec__lead" data-reveal>Каждая единица — это своё настроение. Адреналин, семейное веселье или спокойный кайф на воде — выбирай, что тебе ближе.</p>
   <div class="fleet">
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/pitbike-1.card.webp?v=2')"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/pitbike-1.card.webp?v=3');background-position:50% 45%"></div></div>
       <div class="fleet__info" data-reveal>
         <div class="fleet__idx">01 / Мото</div>
         <h3 class="fleet__name">Прокат питбайков</h3>
@@ -116,7 +119,7 @@
       </div>
     </div>
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/enduro-1.card.webp?v=2')"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/enduro-1.card.webp?v=3')"></div></div>
       <div class="fleet__info" data-reveal>
         <div class="fleet__idx">02 / Мото</div>
         <h3 class="fleet__name">Прокат эндуро мотоциклов</h3>
@@ -138,9 +141,9 @@
       </div>
     </div>
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/snow-1.card.webp');background-position:78% 50%"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/snow-1.card.webp');background-position:100% 50%"></div></div>
       <div class="fleet__info" data-reveal>
-        <div class="fleet__idx">04 / ��има</div>
+        <div class="fleet__idx">04 / Зима</div>
         <h3 class="fleet__name">Прокат сноубайков</h3>
         <p class="fleet__desc">Зима перестаёт быть скучной. Мотоцикл на гусенице и лыже, снежная целина и брызги пудры из-под гусеницы — впечатлений хватит до весны.</p>
         <dl class="fleet__meta">
@@ -149,7 +152,7 @@
       </div>
     </div>
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/sup-1.card.webp');background-position:78% 50%"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/sup-1.card.webp');background-position:100% 50%"></div></div>
       <div class="fleet__info" data-reveal>
         <div class="fleet__idx">05 / Вода</div>
         <h3 class="fleet__name">Прокат SUP-бордов</h3>
@@ -160,7 +163,7 @@
       </div>
     </div>
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/boat-1.card.webp');background-position:22% 50%"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/boat-1.card.webp');background-position:4% 50%"></div></div>
       <div class="fleet__info" data-reveal>
         <div class="fleet__idx">06 / Вода</div>
         <h3 class="fleet__name">Прокат лодок (на вёслах)</h3>
@@ -171,11 +174,11 @@
       </div>
     </div>
     <div class="fleet__row">
-      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/motor-1.card.webp');background-position:78% 50%"></div></div>
+      <div class="fleet__media"><div class="ph is-loaded" data-parallax="12" style="background-image:url('img/cards/motor-1.card.webp?v=2');background-position:50% 50%"></div></div>
       <div class="fleet__info" data-reveal>
         <div class="fleet__idx">07 / Вода</div>
         <h3 class="fleet__name">Прокат лодочных моторов</h3>
-        <p class="fleet__desc">Есть своя лодка — бери только мотор. Тихий четырёхтактный Suzuki 2,5 л.с. для спокойной рыбалки или бодрый двухтактный 9,9 л.с., чтобы быстро уходи��ь на дальние точки.</p>
+        <p class="fleet__desc">Есть своя лодка — бери только мотор. Тихий четырёхтактный Suzuki 2,5 л.с. для спокойной рыбалки или бодрый двухтактный 9,9 л.с., чтобы быстро уходить на дальние точки.</p>
         <dl class="fleet__meta">
           <div><dt>2,5 л.с. будни</dt><dd>1 000 ₽</dd></div><div><dt>9,9 л.с. будни</dt><dd>2 500 ₽</dd></div><div><dt>неделя</dt><dd>от 5 000 ₽</dd></div>
         </dl>
@@ -205,7 +208,7 @@
         <a class="tour__btn" href="#zapis">Записаться <span>→</span></a></div>
     </article>
     <article class="tour" data-reveal>
-      <div class="tour__media"><div class="ph is-loaded" style="background-image:url('img/cards/pitbike-1.card.webp?v=2')"></div>
+      <div class="tour__media"><div class="ph is-loaded" style="background-image:url('img/cards/pitbike-1.card.webp?v=3');background-position:50% 45%"></div>
         <span class="tour__tag">С инструктором</span><span class="tour__price">3 000 ₽/час</span></div>
       <div class="tour__body"><h3 class="tour__name">Обучение с нуля</h3>
         <p class="tour__desc">Никогда не сидел за рулём? Научим с нуля — спокойно, на поле, без стресса.</p>
@@ -240,7 +243,7 @@
         <a class="tour__btn" href="#zapis">Записаться <span>→</span></a></div>
     </article>
     <article class="tour" data-reveal>
-      <div class="tour__media"><div class="ph is-loaded" style="background-image:url('img/cards/motor-1.card.webp')"></div>
+      <div class="tour__media"><div class="ph is-loaded" style="background-image:url('img/cards/motor-1.card.webp?v=2');background-position:50% 50%"></div>
         <span class="tour__tag">Отдельно</span><span class="tour__price">от 1 000 ₽/день</span></div>
       <div class="tour__body"><h3 class="tour__name">Лодочные моторы</h3>
         <p class="tour__desc">Есть своя лодка — бери только мотор: 2,5 л.с. Suzuki или 9,9 л.с.</p>
@@ -416,6 +419,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script src="js/p2.js?v=24"></script>
+<script src="js/p2.js?v=25"></script>
 </body>
 </html>
