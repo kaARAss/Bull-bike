@@ -337,7 +337,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;
   padding:clamp(12px,4vw,40px);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s}
 .tmodal.open{opacity:1;visibility:visible}
 .tmodal__overlay{position:fixed;inset:0;background:rgba(6,6,8,.97);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%)}
-.tmodal__card{position:relative;z-index:1;width:min(980px,100%);max-height:92vh;overflow:auto;
+.tmodal__card{position:relative;z-index:1;width:min(980px,100%);max-height:92vh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
   background:#111114;border:1px solid var(--line);border-radius:22px;
   transform:translateY(24px) scale(.98);transition:transform .35s var(--ease);
   display:grid;grid-template-columns:1.15fr 1fr}
@@ -449,3 +449,8 @@ body.tmodal-lock{position:fixed;left:0;right:0;width:100%}
 .pfoot__logo{height:44px;width:auto;display:block;flex:0 0 auto}
 @media (max-width:640px){.pnav__logo__img{height:30px}.pnav__logo{gap:8px}.pfoot__logo{height:38px}}
 @media (max-width:420px){.pnav__logo__txt{display:none}}
+
+.pfoot__addr{color:var(--faint);text-decoration:none;line-height:1.45;transition:color .18s}
+.pfoot__addr:hover{color:var(--ink)}
+.pfoot__maplink{margin-top:8px;display:inline-block;font:700 .74rem/1 var(--disp);letter-spacing:.08em;text-transform:uppercase;color:var(--brand);text-decoration:none}
+.pfoot__maplink:hover{opacity:.75}
