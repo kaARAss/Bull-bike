@@ -5,6 +5,6 @@
   "btnGhost": "Услуги и цены",
   "btnPrimaryHref": "#lead",
   "btnGhostHref": "#tours",
-  "image": "/images/hero.webp",
-  "imageMobile": "images/hero_m.jpg"
+  "image": "images/hero.webp",
+  "imageMobile": "images/hero-mobile.webp"
 }
