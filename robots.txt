@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://xn----7sbbajkzm6a6aqb3j.xn--p1ai/sitemap.xml
+Sitemap: https://bull-bike.ru/sitemap.xml

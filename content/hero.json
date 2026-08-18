@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Bull Bike — заряд энергии и эмоций",
+  "subtitle": "Прокат питбайков, эндуро, квадроциклов, сноубайков, SUP и лодок · Лужский район",
+  "btnPrimary": "Записаться",
+  "btnGhost": "Услуги и цены",
+  "btnPrimaryHref": "#lead",
+  "btnGhostHref": "#tours",
+  "image": "/images/hero.webp",
+  "imageMobile": "images/hero_m.jpg"
+}
