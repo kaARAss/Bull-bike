@@ -1,228 +1,77 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Управление сайтом · МотоГОСТ</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Панель управления · Bull Bike</title>
+<link rel="icon" href="../favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/admin.css" />
 </head>
 <body>
-  <!-- Админ-панель Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
-  <script>
-  (function(){
-    var CMS = window.CMS;
-    var h = window.h;
-    var createClass = window.createClass;
-    if(!CMS || !h || !createClass){ console.warn('Decap CMS API not ready'); return; }
 
-    CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Oswald:wght@500;600;700&family=Russo+One&display=swap');
+<!-- ===== Экран входа ===== -->
+<div id="loginView" class="login-wrap">
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <div class="login-logo">
+      <img src="../images/logo-nav.png" alt="Bull Bike" onerror="this.style.display='none'" />
+      <b>Bull Bike</b>
+    </div>
+    <p class="login-sub">Панель управления сайтом — войдите по логину и паролю</p>
+    <div id="loginErr" class="login-err hidden"></div>
+    <div class="fld">
+      <label for="login">Логин</label>
+      <input class="inp" type="text" id="login" name="username" autocomplete="username" required />
+    </div>
+    <div class="fld">
+      <label for="password">Пароль</label>
+      <input class="inp" type="password" id="password" name="password" autocomplete="current-password" required />
+    </div>
+    <button class="btn btn-block" type="submit" id="loginBtn">Войти</button>
+  </form>
+</div>
 
-    var css = "\
-:root{--acc:#ff5a1f;--acc2:#ff8a3d;--card:#171513;--muted:#a7a097;--line:rgba(255,255,255,.08)}\
-html,body{margin:0}\
-body{font-family:'Manrope',system-ui,sans-serif;background:radial-gradient(120% 100% at 50% 0%,#16130f 0%,#0c0b0a 62%) no-repeat #0c0b0a;color:#f6f1ea;line-height:1.6;padding:22px}\
-.pv{max-width:700px;margin:0 auto}\
-.pv-eyebrow{font-family:'Oswald',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-size:13px;font-weight:600;margin-bottom:10px}\
-.pv-h1{font-family:'Russo One','Oswald',sans-serif;font-size:42px;line-height:1.05;margin:0 0 14px;color:#fff;text-transform:uppercase}\
-.pv-h2{font-family:'Oswald',sans-serif;font-size:30px;margin:0 0 12px;color:#fff;text-transform:uppercase}\
-.pv-sub{color:#cfc9c0;font-size:17px;margin:0 0 18px}\
-.pv p{color:#bdb6ad;margin:0 0 10px}\
-.pv-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}\
-.pv-btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:700;font-size:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#1a1714}\
-.pv-btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}\
-.pv-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 14px}\
-.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}\
-.pv-svc h3{font-family:'Oswald',sans-serif;color:#fff;font-size:20px;margin:0 0 4px;text-transform:uppercase}\
-.pv-price{color:var(--acc);font-weight:800;font-family:'Oswald',sans-serif;font-size:18px;margin-top:8px}\
-.pv-specs{color:var(--muted);font-size:13px;margin:0 0 8px}\
-.pv-svc-intro{color:#d8d2c9;font-size:13.5px;margin:10px 0 6px}\
-.pv-svc-ul{margin:6px 0 0;padding-left:18px}\
-.pv-svc-ul li{color:#cfc8bf;font-size:12.8px;margin:4px 0;line-height:1.45}\
-.pv-svc-ul li b{color:#fff}\
-.pv img{max-width:100%;border-radius:12px;display:block}\
-.pv-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}\
-.pv-thumbs img{width:100%;height:92px;object-fit:cover}\
-.pv-contact{display:flex;flex-direction:column;gap:10px}\
-.pv-row{display:flex;gap:10px;align-items:baseline}\
-.pv-label{color:var(--acc);font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.1em;min-width:96px}\
-.pv-muted{color:var(--muted)}\
-.pv-badge{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,90,31,.15);color:var(--acc);margin-bottom:12px}\
-.pv-flags{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}\
-.pv-flag{font-size:12px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--line)}\
-.pv-flag.on{background:rgba(120,200,255,.14);color:#bfe6ff;border-color:rgba(120,200,255,.3)}\
-.pv-hidden{opacity:.45}\
-";
-    CMS.registerPreviewStyle(css, { raw: true });
+<!-- ===== Приложение ===== -->
+<div id="appView" class="app hidden">
+  <div class="scrim" id="scrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <img src="../images/logo-nav.png" alt="" onerror="this.style.display='none'" />
+      <b>Bull Bike</b>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <span class="sb-ava" id="userAva">A</span>
+        <div><div id="userName" style="font-size:13.5px;color:var(--tx)">admin</div><div style="font-size:11.5px">Администратор</div></div>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-block" id="logoutBtn">Выйти</button>
+      <div style="margin-top:12px">Сайт: <a href="../" target="_blank" rel="noopener">открыть ↗</a></div>
+    </div>
+  </aside>
 
-    function asset(props, path){
-      if(!path) return null;
-      try{ var a = props.getAsset(path); return (a && a.toString) ? a.toString() : a; }
-      catch(e){ return path; }
-    }
-    function val(e, k){ var v = e.get(k); return (v===undefined||v===null) ? '' : v; }
-    // **текст** -> жирный; возвращает массив React-узлов
-    function fmt(s){
-      s = String(s==null?'':s);
-      var parts = s.split(/\*\*([^*]+)\*\*/);
-      return parts.map(function(p,i){ return (i%2===1) ? h('b',{key:i}, p) : p; });
-    }
+  <div class="main">
+    <div class="topbar">
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <h1 id="pageTitle">Главный экран</h1>
+      <div class="save-state"><span class="dot" id="stateDot"></span><span id="stateTxt">Всё сохранено</span></div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
 
-    CMS.registerPreviewTemplate('hero', createClass({ render:function(){
-      var e = this.props.entry.getIn(['data']);
-      return h('div',{className:'pv'},
-        h('div',{className:'pv-eyebrow'}, val(e,'eyebrow') || 'Надпись сверху'),
-        h('h1',{className:'pv-h1'}, 'ЭНДУРО'),
-        h('p',{className:'pv-sub'}, val(e,'subtitle')),
-        h('div',{className:'pv-btns'},
-          h('span',{className:'pv-btn'}, val(e,'btnPrimary') || 'Кнопка 1'),
-          h('span',{className:'pv-btn ghost'}, val(e,'btnGhost') || 'Кнопка 2')
-        )
-      );
-    }}));
+  <div class="savebar" id="savebar">
+    <div class="sb-txt">Есть несохранённые изменения <b id="dirtyCount"></b></div>
+    <button class="btn btn-ghost btn-sm" id="discardBtn">Отменить</button>
+    <button class="btn" id="saveBtn">Сохранить на сайт</button>
+  </div>
+</div>
 
-    CMS.registerPreviewTemplate('season', createClass({ render:function(){
-      var self = this;
-      var e = this.props.entry.getIn(['data']);
-      var on = !!e.get('enabled');
-      var secOn = !!e.get('secOn');
-      function flag(label,v){ return h('span',{className:'pv-flag'+(v?' on':'')}, (v?'✓ ':'✕ ')+label); }
-      var cardsData = e.get('cards');
-      var carr = (cardsData && cardsData.toArray) ? cardsData.toArray() : [];
-      var cards = carr.map(function(c,i){
-        var src = asset(self.props, c.get('img'));
-        return h('div',{className:'pv-card pv-svc',key:i},
-          src ? h('img',{src:src,style:{marginBottom:'10px',height:'120px',width:'100%',objectFit:'cover'}}) : null,
-          h('h3',{}, c.get('title') || ''),
-          h('p',{}, fmt(c.get('text')))
-        );
-      });
-      return h('div',{className:'pv'+(on?'':' pv-hidden')},
-        h('div',{className:'pv-badge'}, on ? 'Зимний режим ВКЛЮЧЁН' : 'Зимний режим ВЫКЛЮЧЕН'),
-        h('div',{className:'pv-flags'},
-          flag('Снегопад', !!e.get('snow')),
-          flag('Гирлянда', !!e.get('garland')),
-          flag('Колпак на логотипе', !!e.get('hat'))
-        ),
-        h('div',{className:'pv-eyebrow'}, 'Плашка вверху сайта'),
-        h('div',{className:'pv-card'},
-          h('div',{style:{fontSize:'30px',marginBottom:'6px'}}, val(e,'icon') || '❄️'),
-          h('h2',{className:'pv-h2'}, val(e,'title')),
-          h('p',{}, fmt(e.get('text')))
-        ),
-        secOn ? h('div',{className:'pv-eyebrow',style:{marginTop:'18px'}}, 'Зимний раздел на странице') : h('div',{className:'pv-badge'}, 'Зимний раздел скрыт'),
-        secOn ? h('div',{className:'pv-card'},
-          e.get('secKicker') ? h('div',{className:'pv-eyebrow'}, val(e,'secKicker')) : null,
-          h('h2',{className:'pv-h2'}, val(e,'secTitle')),
-          e.get('secLead') ? h('p',{className:'pv-sub'}, val(e,'secLead')) : null,
-          cards.length ? h('div',{className:'pv-grid'}, cards) : null,
-          e.get('ctaText') ? h('div',{className:'pv-btns'}, h('span',{className:'pv-btn'}, val(e,'ctaText'))) : null
-        ) : null
-      );
-    }}));
+<div class="toast-wrap" id="toasts"></div>
 
-    CMS.registerPreviewTemplate('about', createClass({ render:function(){
-      var e = this.props.entry.getIn(['data']);
-      var src = asset(this.props, e.get('image'));
-      return h('div',{className:'pv'},
-        h('div',{className:'pv-eyebrow'}, val(e,'kicker')),
-        h('h2',{className:'pv-h2'}, val(e,'title')),
-        src ? h('div',{style:{margin:'0 0 14px'}}, h('img',{src:src})) : null,
-        e.get('p1') ? h('p',{}, val(e,'p1')) : null,
-        e.get('p2') ? h('p',{}, val(e,'p2')) : null,
-        e.get('p3') ? h('p',{}, val(e,'p3')) : null,
-        e.get('legend') ? h('p',{style:{color:'#fff',fontWeight:700}}, val(e,'legend')) : null,
-        e.get('cta') ? h('div',{className:'pv-btns'}, h('span',{className:'pv-btn'}, val(e,'cta'))) : null
-      );
-    }}));
-
-    CMS.registerPreviewTemplate('services', createClass({ render:function(){
-      var self = this;
-      var items = this.props.entry.getIn(['data','items']);
-      var arr = (items && items.toArray) ? items.toArray() : [];
-      var cards = arr.map(function(it,i){
-        var src = asset(self.props, it.get('image'));
-        var dets = it.get('details');
-        var darr = (dets && dets.toArray) ? dets.toArray() : [];
-        var lis = [];
-        darr.forEach(function(li,j){
-          if(li!=null && String(li).trim()!=='') lis.push(h('li',{key:j}, fmt(li)));
-        });
-        var intro = it.get('intro');
-        return h('div',{className:'pv-card pv-svc',key:i},
-          src ? h('img',{src:src,style:{marginBottom:'10px',height:'130px',width:'100%',objectFit:'cover'}}) : null,
-          h('h3',{}, it.get('title') || ''),
-          h('div',{className:'pv-specs'}, it.get('specs') || ''),
-          h('p',{}, it.get('teaser') || ''),
-          h('div',{className:'pv-price'}, it.get('price') || ''),
-          (intro && String(intro).trim()!=='') ? h('p',{className:'pv-svc-intro'}, fmt(intro)) : null,
-          lis.length ? h('ul',{className:'pv-svc-ul'}, lis) : null
-        );
-      });
-      return h('div',{className:'pv'},
-        h('div',{className:'pv-eyebrow'}, 'Услуги и цены'),
-        h('div',{className:'pv-grid'}, cards)
-      );
-    }}));
-
-    CMS.registerPreviewTemplate('contacts', createClass({ render:function(){
-      var e = this.props.entry.getIn(['data']);
-      function row(label,v){ return v ? h('div',{className:'pv-row'}, h('span',{className:'pv-label'},label), h('span',{},v)) : null; }
-      return h('div',{className:'pv'},
-        h('h2',{className:'pv-h2'}, 'Контакты'),
-        h('div',{className:'pv-card pv-contact'},
-          row('Адрес', val(e,'address')),
-          e.get('addressNote') ? h('div',{className:'pv-muted',style:{fontSize:'13px',marginTop:'-4px'}}, val(e,'addressNote')) : null,
-          row('Телефон', val(e,'phoneText')),
-          row('Telegram', val(e,'tgGroupText')),
-          row('Telegram', val(e,'tgDmText')),
-          row('ВКонтакте', val(e,'vkText'))
-        )
-      );
-    }}));
-
-    CMS.registerPreviewTemplate('gallery', createClass({ render:function(){
-      var self = this;
-      var imgs = this.props.entry.getIn(['data','images']);
-      var arr = (imgs && imgs.toArray) ? imgs.toArray() : [];
-      var thumbs = arr.map(function(p,i){ return h('img',{key:i,src:asset(self.props,p)}); });
-      return h('div',{className:'pv'},
-        h('div',{className:'pv-eyebrow'}, 'Галерея · ' + arr.length + ' фото'),
-        h('div',{className:'pv-thumbs'}, thumbs)
-      );
-    }}));
-    CMS.registerPreviewTemplate('how', createClass({ render:function(){
-      var self = this;
-      var e = this.props.entry.getIn(['data']);
-      var cardsData = e.get('cards');
-      var carr = (cardsData && cardsData.toArray) ? cardsData.toArray() : [];
-      var cards = carr.map(function(c,i){
-        var src = asset(self.props, c.get('image'));
-        var stepsData = c.get('steps');
-        var sarr = (stepsData && stepsData.toArray) ? stepsData.toArray() : [];
-        var steps = sarr.map(function(s,j){
-          return h('li',{key:j,style:{margin:'5px 0',lineHeight:'1.4'}},
-            h('b',{style:{color:'var(--acc)',marginRight:'8px',fontFamily:"'Oswald',sans-serif",textTransform:'uppercase',fontSize:'11.5px'}}, s.get('label') || ''),
-            h('span',{style:{color:'#fff',fontSize:'12.8px'}}, s.get('text') || '')
-          );
-        });
-        return h('div',{className:'pv-card pv-svc',key:i},
-          src ? h('img',{src:src,style:{marginBottom:'10px',height:'150px',width:'100%',objectFit:'cover'}}) : null,
-          c.get('tag') ? h('div',{className:'pv-badge'}, c.get('tag')) : null,
-          h('h3',{}, c.get('title') || ''),
-          c.get('intro') ? h('p',{className:'pv-svc-intro'}, c.get('intro')) : null,
-          steps.length ? h('ul',{className:'pv-svc-ul',style:{listStyle:'none',paddingLeft:0}}, steps) : null
-        );
-      });
-      return h('div',{className:'pv'},
-        h('div',{className:'pv-eyebrow'}, val(e,'kicker') || 'Надпись'),
-        h('h2',{className:'pv-h2'}, val(e,'title')),
-        e.get('lead') ? h('p',{className:'pv-sub'}, val(e,'lead')) : null,
-        cards.length ? h('div',{className:'pv-grid'}, cards) : null
-      );
-    }}));
-
-  })();
-  </script>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>

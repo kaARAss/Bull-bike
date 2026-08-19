@@ -125,12 +125,48 @@
     });
   }
 
+  // Применяем позицию фотографий (background-position) из админки —
+  // то самое "смещение фото в стороны". Формат значения: "50% 40%".
+  function setPos(el, pos) {
+    if (el && pos) el.style.backgroundPosition = pos;
+  }
+  function applyPositions() {
+    // Главный экран
+    if (data.hero && data.hero.imagePos) {
+      setPos(document.querySelector(".hero-photo"), data.hero.imagePos);
+      setPos(document.querySelector(".hero-bg"), data.hero.imagePos);
+    }
+    // О нас
+    if (data.about && data.about.imagePos) {
+      setPos(document.querySelector("#about .ph-box"), data.about.imagePos);
+    }
+    // Услуги — карточка и фото в окне "Подробнее"
+    var items = data.services && data.services.items;
+    if (Array.isArray(items)) {
+      var tours = document.querySelectorAll("#tours .svc-cards .tour");
+      items.forEach(function (it, i) {
+        if (!it || !it.imagePos || !tours[i]) return;
+        setPos(tours[i].querySelector(".t-img"), it.imagePos);
+        setPos(tours[i].querySelector(".t-detail-photo"), it.imagePos);
+      });
+    }
+    // Как проходит — фото формата
+    if (data.how && Array.isArray(data.how.cards)) {
+      var fmt = document.querySelectorAll("#how .fmt-cards .fmt-card");
+      data.how.cards.forEach(function (c, i) {
+        if (!c || !c.imagePos || !fmt[i]) return;
+        setPos(fmt[i].querySelector(".fmt-media"), c.imagePos);
+      });
+    }
+  }
+
   function render() {
     try { applyText(); } catch (e) {}
     try { applyImages(); } catch (e) {}
     try { applyServiceDetails(); } catch (e) {}
     try { applyHow(); } catch (e) {}
     try { applySeason(); } catch (e) {}
+    try { applyPositions(); } catch (e) {}
   }
 
   function load() {
