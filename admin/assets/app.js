@@ -65,7 +65,7 @@
             { k: "image", t: "image", pos: "imagePos", ratio: "4/3", label: "Фото" },
             { k: "intro", t: "textarea", label: "Вступление в окне «Подробнее»" },
             { k: "details", t: "strlist", label: "Пункты описания", addLabel: "Добавить пункт" },
-            { k: "gallery", t: "gallery", label: "Фото в окне «Подробнее» (галерея)" }
+            { k: "gallery", t: "gallery", pos: "galleryPos", label: "Фото в окне «Подробнее» (галерея — перетащите фото, чтобы сместить кадр)" }
           ]
         }}
       ]},
@@ -234,7 +234,7 @@
       wrap.appendChild(ta); return wrap;
     }
     if (f.t === "strlist") { wrap.appendChild(strListEditor(obj, f)); return wrap; }
-    if (f.t === "gallery") { wrap.appendChild(galleryEditor(obj, { key: f.k })); return wrap; }
+    if (f.t === "gallery") { wrap.appendChild(galleryEditor(obj, { key: f.k, posKey: f.pos })); return wrap; }
     if (f.t === "objlist") { wrap.appendChild(objListEditor(obj, f, true)); return wrap; }
     // text / url
     var inp = el("input", { class: "inp", type: "text" }); inp.value = obj[f.k] == null ? "" : obj[f.k];
@@ -440,21 +440,63 @@
   function galleryEditor(obj, cfg) {
     if (!Array.isArray(obj[cfg.key])) obj[cfg.key] = [];
     var arr = obj[cfg.key];
+    var posKey = cfg.posKey;
+    var posArr = null;
+    if (posKey) {
+      if (!Array.isArray(obj[posKey])) obj[posKey] = [];
+      posArr = obj[posKey];
+      while (posArr.length < arr.length) posArr.push("50% 50%");
+      posArr.length = arr.length;
+    }
     var wrap = el("div");
     var grid = el("div", { class: "gal-grid" });
     function render() {
       grid.innerHTML = "";
       arr.forEach(function (path, i) {
-        var cell = el("div", { class: "gal-cell" });
+        var cell = el("div", { class: "gal-cell" + (posArr ? " gal-cell-move" : "") });
         cell.style.backgroundImage = "url('" + mediaUrl(path).replace(/'/g, "%27") + "')";
+        if (posArr) cell.style.backgroundPosition = posArr[i] || "50% 50%";
         var up = el("button", { type: "button", class: "gc-btn", title: "Раньше", text: "←" });
         var dn = el("button", { type: "button", class: "gc-btn", title: "Позже", text: "→" });
         var del = el("button", { type: "button", class: "gc-btn", title: "Удалить", text: "✕" });
-        up.addEventListener("click", function () { if (i > 0) { arr.splice(i - 1, 0, arr.splice(i, 1)[0]); render(); markChanged(); } });
-        dn.addEventListener("click", function () { if (i < arr.length - 1) { arr.splice(i + 1, 0, arr.splice(i, 1)[0]); render(); markChanged(); } });
-        del.addEventListener("click", function () { arr.splice(i, 1); render(); markChanged(); });
+        up.addEventListener("click", function () { if (i > 0) { arr.splice(i - 1, 0, arr.splice(i, 1)[0]); if (posArr) posArr.splice(i - 1, 0, posArr.splice(i, 1)[0]); render(); markChanged(); } });
+        dn.addEventListener("click", function () { if (i < arr.length - 1) { arr.splice(i + 1, 0, arr.splice(i, 1)[0]); if (posArr) posArr.splice(i + 1, 0, posArr.splice(i, 1)[0]); render(); markChanged(); } });
+        del.addEventListener("click", function () { arr.splice(i, 1); if (posArr) posArr.splice(i, 1); render(); markChanged(); });
         cell.appendChild(el("div", { class: "gc-tools" }, [up, dn, del]));
         cell.appendChild(el("span", { class: "gc-idx", text: (i + 1) }));
+        if (posArr) {
+          cell.appendChild(el("span", { class: "gc-move-hint", text: "⤴ двигать" }));
+          var drag = null;
+          var move = function (e) {
+            if (!drag) return;
+            var p = e.touches ? e.touches[0] : e;
+            var dx = (p.clientX - drag.x) / drag.w * 100;
+            var dy = (p.clientY - drag.y) / drag.h * 100;
+            var nx = clamp(drag.px - dx * 1.4);
+            var ny = clamp(drag.py - dy * 1.4);
+            posArr[i] = Math.round(nx) + "% " + Math.round(ny) + "%";
+            cell.style.backgroundPosition = posArr[i];
+            if (e.cancelable) e.preventDefault();
+          };
+          var upEnd = function () {
+            if (!drag) return; drag = null; cell.classList.remove("dragging");
+            window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", upEnd);
+            window.removeEventListener("touchmove", move); window.removeEventListener("touchend", upEnd);
+            markChanged();
+          };
+          var down = function (e) {
+            if (e.target.closest(".gc-btn")) return;
+            var pos = parsePos(posArr[i]);
+            var p = e.touches ? e.touches[0] : e;
+            drag = { x: p.clientX, y: p.clientY, px: pos.x, py: pos.y, w: cell.clientWidth, h: cell.clientHeight };
+            cell.classList.add("dragging");
+            window.addEventListener("mousemove", move); window.addEventListener("mouseup", upEnd);
+            window.addEventListener("touchmove", move, { passive: false }); window.addEventListener("touchend", upEnd);
+            e.preventDefault();
+          };
+          cell.addEventListener("mousedown", down);
+          cell.addEventListener("touchstart", down, { passive: false });
+        }
         grid.appendChild(cell);
       });
     }
@@ -468,7 +510,7 @@
           var safe = file.name.toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "");
           var path = MEDIA + "/" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6) + "-" + (safe || "photo.jpg");
           state.uploads[path] = { base64: base64, dataUrl: dataUrl };
-          arr.push(path); render(); markChanged();
+          arr.push(path); if (posArr) posArr.push("50% 50%"); render(); markChanged();
         };
         reader.readAsDataURL(file);
       });
