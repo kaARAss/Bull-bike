@@ -135,10 +135,12 @@
         "Залог 5 000 ₽ + документ."
       ],
       "gallery": [
-        "images/svc_boat.webp"
+        "images/svc_boat.webp",
+        "images/mt0qu1ay-4oxk-7422408498.jpg"
       ],
       "galleryPos": [
-        "10% 45%"
+        "10% 63%",
+        "44% 42%"
       ],
       "imagePos": "100% 40%"
     },
