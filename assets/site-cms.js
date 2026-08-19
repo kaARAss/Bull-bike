@@ -1,4 +1,4 @@
-/* МотоГОСТ — лёгкий загрузчик контента из /content/*.json.
+/* Bull Bike — лёгкий загрузчик контента из /content/*.json.
    Если файлы не загрузились или поля пустые — на сайте остаётся
    исходный текст/картинки (значения служат запасными). */
 (function () {
@@ -52,8 +52,15 @@
     if (data.about && data.about.image) setImg("--ph-about", data.about.image);
     var items = data.services && data.services.items;
     if (Array.isArray(items)) {
+      var svcTours = document.querySelectorAll("#tours .svc-cards .tour");
       items.forEach(function (it, i) {
-        if (it && it.image && SVC_VARS[i]) setImg(SVC_VARS[i], it.image);
+        if (!it || !it.image) return;
+        var t = svcTours[i];
+        if (t) {
+          var im = t.querySelector(".t-img");
+          if (im) im.style.backgroundImage = "url('" + it.image + "')";
+        }
+        if (SVC_VARS[i]) setImg(SVC_VARS[i], it.image);
       });
     }
     if (data.how && Array.isArray(data.how.cards)) {
@@ -99,14 +106,21 @@
       if (!card || !it) return;
       var gi = card.querySelector(".t-detail-img");
       if (!gi) return;
-      var list = Array.isArray(it.gallery) ? it.gallery.filter(function (u) {
-        return u != null && String(u).trim() !== "";
-      }) : [];
+      var rawG = Array.isArray(it.gallery) ? it.gallery : [];
+      var rawP = Array.isArray(it.galleryPos) ? it.galleryPos : [];
+      var list = [], posList = [];
+      rawG.forEach(function (u, k) {
+        if (u != null && String(u).trim() !== "") {
+          list.push(String(u).trim());
+          posList.push((rawP[k] && String(rawP[k]).trim()) || "center");
+        }
+      });
       if (!list.length) return; // нет данных — оставляем исходные фото
       gi.setAttribute("data-gallery", list.join(","));
+      gi.setAttribute("data-gallery-pos", posList.join(";"));
       gi.setAttribute("data-idx", "0");
       var ph = gi.querySelector(".t-detail-photo");
-      if (ph) ph.style.backgroundImage = "url('" + list[0] + "')";
+      if (ph) { ph.style.backgroundImage = "url('" + list[0] + "')"; ph.style.backgroundPosition = posList[0]; }
       var cnt = gi.querySelector(".tg-count");
       if (cnt) cnt.textContent = "1/" + list.length;
     });
