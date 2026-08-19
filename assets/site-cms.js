@@ -89,6 +89,29 @@
     });
   }
 
+  // Галерея фото в окне «Подробнее» для каждой услуги (берётся из админки).
+  function applyServiceGalleries() {
+    var items = data.services && data.services.items;
+    if (!Array.isArray(items)) return;
+    var cards = document.querySelectorAll("#tours .svc-cards .tour");
+    items.forEach(function (it, i) {
+      var card = cards[i];
+      if (!card || !it) return;
+      var gi = card.querySelector(".t-detail-img");
+      if (!gi) return;
+      var list = Array.isArray(it.gallery) ? it.gallery.filter(function (u) {
+        return u != null && String(u).trim() !== "";
+      }) : [];
+      if (!list.length) return; // нет данных — оставляем исходные фото
+      gi.setAttribute("data-gallery", list.join(","));
+      gi.setAttribute("data-idx", "0");
+      var ph = gi.querySelector(".t-detail-photo");
+      if (ph) ph.style.backgroundImage = "url('" + list[0] + "')";
+      var cnt = gi.querySelector(".tg-count");
+      if (cnt) cnt.textContent = "1/" + list.length;
+    });
+  }
+
   function applySeason() {
     var el = document.getElementById("seasonBanner");
     var s = data.season;
@@ -164,6 +187,7 @@
     try { applyText(); } catch (e) {}
     try { applyImages(); } catch (e) {}
     try { applyServiceDetails(); } catch (e) {}
+    try { applyServiceGalleries(); } catch (e) {}
     try { applyHow(); } catch (e) {}
     try { applySeason(); } catch (e) {}
     try { applyPositions(); } catch (e) {}
