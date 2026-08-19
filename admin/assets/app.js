@@ -125,33 +125,6 @@
           { k: "maxGroup", t: "text", label: "MAX-группа (ссылка)", half: true },
           { k: "fabPhone", t: "text", label: "Телефон кнопки-звонка" }
         ]}
-      ]},
-
-    { key: "season", file: "season.json", title: "Сезон/акция", icon: "❄️",
-      intro: "Сезонный блок и украшения. Включается переключателем.",
-      cards: [
-        { title: "Настройки", icon: "⚙️", fields: [
-          { k: "enabled", t: "bool", label: "Включить сезонный режим" },
-          { k: "snow", t: "bool", label: "Снег" },
-          { k: "garland", t: "bool", label: "Гирлянда" },
-          { k: "hat", t: "bool", label: "Шапка на логотипе" }
-        ]},
-        { title: "Текст плашки", icon: "✏️", fields: [
-          { k: "secKicker", t: "text", label: "Надзаголовок" },
-          { k: "secTitle", t: "text", label: "Заголовок" },
-          { k: "secLead", t: "textarea", label: "Описание" },
-          { k: "ctaText", t: "text", label: "Текст кнопки", half: true },
-          { k: "ctaHref", t: "text", label: "Ссылка кнопки", half: true }
-        ]},
-        { title: "Карточки", icon: "🃏", list: {
-          key: "cards", titleKey: "title", addLabel: "Добавить карточку",
-          fields: [
-            { k: "icon", t: "text", label: "Иконка (эмодзи)", half: true },
-            { k: "title", t: "text", label: "Заголовок", half: true },
-            { k: "text", t: "textarea", label: "Текст" },
-            { k: "img", t: "image", pos: "imgPos", ratio: "4/3", label: "Фото" }
-          ]
-        }}
       ]}
   ];
 
@@ -583,7 +556,7 @@
       renderSection(SECTIONS.find(function (s) { return s.key === state.active; }));
       toast("Сохранено (" + (res.saved || changes.length) + " файл.). Сайт обновится через 1–2 мин.", "ok", "Готово");
     }).catch(function (e) {
-      toast(String(e.message || e), "err", "Ошибка сохранения");
+      toast(String(e.message || e), "err", "��шибка сохранения");
       if (/Сессия истекла/i.test(String(e.message))) { setTimeout(logout, 1200); }
     }).then(function () { btn.disabled = false; btn.innerHTML = old; });
   }
