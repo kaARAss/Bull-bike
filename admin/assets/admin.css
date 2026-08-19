@@ -3,7 +3,7 @@
   --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
   --tx:#e9f1f0; --muted:#8fa0a0; --muted2:#6f8180;
   --acc:#7FD8D0; --acc2:#5FC9C0; --acc-d:#0E1F1E;
-  --ok:#4ec38a; --warn:#e0b354; --err:# e2685f; --err:#e2685f;
+  --ok:#4ec38a; --warn:#e0b354; --err:#e2685f;
   --radius:16px; --radius-sm:11px;
   --shadow:0 24px 60px rgba(0,0,0,.45);
   --font:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -40,8 +40,8 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.55}
 .login-err{background:rgba(226,104,95,.12);border:1px solid rgba(226,104,95,.35);color:#f2b2ab;padding:10px 13px;border-radius:10px;font-size:13.5px;margin-bottom:16px}
 
 /* ============ APP SHELL ============ */
-.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
-.sidebar{background:linear-gradient(180deg,#12181b,#0f1416);border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);grid-template-areas:"side main";min-height:100vh}
+.sidebar{grid-area:side;background:linear-gradient(180deg,#12181b,#0f1416);border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
 .sb-logo{display:flex;align-items:center;gap:11px;padding:4px 8px 20px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .sb-logo img{height:36px}
 .sb-logo b{font-family:var(--head);text-transform:uppercase;letter-spacing:.5px;font-size:17px}
@@ -54,7 +54,7 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.55}
 .sb-user{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .sb-ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--acc-d);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--head)}
 
-.main{display:flex;flex-direction:column;min-width:0}
+.main{grid-area:main;display:flex;flex-direction:column;min-width:0}
 .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:16px;padding:16px 28px;background:rgba(14,17,19,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .topbar h1{font-family:var(--head);text-transform:uppercase;letter-spacing:.5px;font-size:20px;margin:0;flex:1}
 .burger{display:none;background:none;border:1px solid var(--line2);color:var(--tx);border-radius:9px;width:40px;height:38px;font-size:18px;cursor:pointer}
@@ -153,7 +153,7 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.55}
 
 /* ============ RESPONSIVE ============ */
 @media(max-width:900px){
-  .app{grid-template-columns:1fr}
+  .app{grid-template-columns:1fr;grid-template-areas:"main"}
   .sidebar{position:fixed;left:0;top:0;bottom:0;width:262px;z-index:60;transform:translateX(-105%);transition:transform .25s;height:100vh}
   .sidebar.open{transform:none;box-shadow:var(--shadow)}
   .burger{display:block}
