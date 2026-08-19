@@ -64,7 +64,8 @@
             { k: "teaser", t: "textarea", label: "Краткое описание (на карточке)" },
             { k: "image", t: "image", pos: "imagePos", ratio: "4/3", label: "Фото" },
             { k: "intro", t: "textarea", label: "Вступление в окне «Подробнее»" },
-            { k: "details", t: "strlist", label: "Пункты описания", addLabel: "Добавить пункт" }
+            { k: "details", t: "strlist", label: "Пункты описания", addLabel: "Добавить пункт" },
+            { k: "gallery", t: "gallery", label: "Фото в окне «Подробнее» (галерея)" }
           ]
         }}
       ]},
@@ -173,10 +174,12 @@
   function api(action, payload, withAuth) {
     if (!API) return Promise.reject(new Error("Не задан адрес сервера (API_BASE в admin/assets/config.js)"));
     var headers = { "Content-Type": "application/json" };
-    if (withAuth) headers["Authorization"] = "Bearer " + (sessionStorage.getItem(TOKEN_KEY) || "");
+    var bodyObj = Object.assign({ action: action }, payload || {});
+    // Токен передаём в теле запроса: заголовок Authorization перехватывает шлюз Yandex Cloud (ошибка 403).
+    if (withAuth) bodyObj.token = sessionStorage.getItem(TOKEN_KEY) || "";
     return fetch(API, {
       method: "POST", headers: headers,
-      body: JSON.stringify(Object.assign({ action: action }, payload || {}))
+      body: JSON.stringify(bodyObj)
     }).then(function (r) {
       return r.json().catch(function () { return { ok: false, error: "Пустой ответ сервера (" + r.status + ")" }; })
         .then(function (j) { if (!r.ok || !j.ok) throw new Error(j && j.error ? j.error : "Ошибка " + r.status); return j; });
@@ -231,6 +234,7 @@
       wrap.appendChild(ta); return wrap;
     }
     if (f.t === "strlist") { wrap.appendChild(strListEditor(obj, f)); return wrap; }
+    if (f.t === "gallery") { wrap.appendChild(galleryEditor(obj, { key: f.k })); return wrap; }
     if (f.t === "objlist") { wrap.appendChild(objListEditor(obj, f, true)); return wrap; }
     // text / url
     var inp = el("input", { class: "inp", type: "text" }); inp.value = obj[f.k] == null ? "" : obj[f.k];
