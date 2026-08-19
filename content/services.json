@@ -20,7 +20,8 @@
         "images/svc_pit2.webp",
         "images/bb_pit_1.webp",
         "images/bb_pit_2.webp"
-      ]
+      ],
+      "imagePos": "100% 15%"
     },
     {
       "title": "Прокат эндуро",
