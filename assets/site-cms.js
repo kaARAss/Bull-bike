@@ -3,7 +3,7 @@
    исходный текст/картинки (значения служат запасными). */
 (function () {
   "use strict";
-  var FILES = ["season", "hero", "about", "services", "contacts", "gallery", "how", "vkl"];
+  var FILES = ["season", "hero", "about", "services", "contacts", "gallery", "how", "vkl", "settings"];
   var SVC_VARS = ["--svc-pit", "--svc-end", "--svc-instr", "--svc-gid"];
   var data = {};
 
@@ -210,7 +210,15 @@
     });
   }
 
+  // Цветовая гамма: золото (по умолчанию) или тифани.
+  function applyTheme() {
+    var s = data.settings;
+    var theme = (s && s.gold === false) ? "tiffany" : "gold";
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+
   function render() {
+    try { applyTheme(); } catch (e) {}
     try { applyText(); } catch (e) {}
     try { applyImages(); } catch (e) {}
     try { applyServiceDetails(); } catch (e) {}
