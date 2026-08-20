@@ -207,14 +207,20 @@
     try { applyPositions(); } catch (e) {}
   }
 
+  function reveal() {
+    try { document.documentElement.classList.remove("cms-loading"); } catch (e) {}
+  }
   function load() {
     var pending = FILES.length;
+    var pre = window.__CMS_PRE || {};
     FILES.forEach(function (name) {
-      fetch("content/" + name + ".json", { cache: "no-cache" })
+      var p = pre[name] || fetch("content/" + name + ".json", { cache: "no-cache" })
         .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+      Promise.resolve(p)
         .then(function (j) { if (j) data[name] = j; })
         .catch(function () {})
-        .then(function () { if (--pending === 0) render(); });
+        .then(function () { if (--pending === 0) { render(); reveal(); } });
     });
   }
 
