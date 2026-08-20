@@ -197,12 +197,26 @@
     }
   }
 
+  // Фото пунктов "Что входит" и их смещение из админки.
+  function applyVkl() {
+    var v = data.vkl;
+    if (!v || !Array.isArray(v.items)) return;
+    var phs = document.querySelectorAll("#vkl .feat .f .f-ph");
+    v.items.forEach(function (it, i) {
+      var ph = phs[i];
+      if (!ph || !it) return;
+      if (it.image) ph.style.backgroundImage = "url('" + it.image + "')";
+      if (it.imagePos) ph.style.backgroundPosition = it.imagePos;
+    });
+  }
+
   function render() {
     try { applyText(); } catch (e) {}
     try { applyImages(); } catch (e) {}
     try { applyServiceDetails(); } catch (e) {}
     try { applyServiceGalleries(); } catch (e) {}
     try { applyHow(); } catch (e) {}
+    try { applyVkl(); } catch (e) {}
     try { applySeason(); } catch (e) {}
     try { applyPositions(); } catch (e) {}
   }
