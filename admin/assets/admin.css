@@ -82,7 +82,10 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.55}
 .track::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
 .switch input:checked + .track{background:linear-gradient(135deg,var(--acc),var(--acc2))}
 .switch input:checked + .track::after{transform:translateX(20px)}
-.switch .lbl{font-size:14.5px}
+.fld label.switch{display:inline-flex;text-transform:none;letter-spacing:0;margin-bottom:0;font-family:inherit;color:#e7e4dd}
+.switch .lbl{font-size:14.5px;color:#e7e4dd;text-transform:none;letter-spacing:0;font-family:inherit}
+.sw-state{font-size:12px;font-weight:700;letter-spacing:.5px;padding:3px 11px;border-radius:999px;background:#2a3438;color:#a7a097;text-transform:uppercase;font-family:var(--head);flex:0 0 auto;min-width:52px;text-align:center}
+.switch input:checked ~ .sw-state{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0E1F1E}
 
 /* ============ IMAGE EDITOR ============ */
 .imed{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:18px;align-items:start}

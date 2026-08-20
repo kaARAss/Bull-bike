@@ -133,7 +133,7 @@
       intro: "Цветовая гамма сайта.",
       cards: [
         { title: "Цвета сайта", icon: "🎨", fields: [
-          { k: "gold", t: "bool", label: "Золотая гамма (как в MotoGost). Выкл — бирюзовая (Tiffany)" }
+          { k: "gold", t: "bool", label: "Золотая тема сайта" }
         ]}
       ]}
   ];
@@ -231,8 +231,9 @@
     if (f.t === "bool") {
       var cb = el("input", { type: "checkbox" });
       cb.checked = !!obj[f.k];
-      cb.addEventListener("change", function () { obj[f.k] = cb.checked; markChanged(); });
-      wrap.appendChild(el("label", { class: "switch" }, [cb, el("span", { class: "track" }), el("span", { class: "lbl", text: f.label })]));
+      var swState = el("span", { class: "sw-state", text: cb.checked ? "Вкл" : "Выкл" });
+      cb.addEventListener("change", function () { obj[f.k] = cb.checked; swState.textContent = cb.checked ? "Вкл" : "Выкл"; markChanged(); });
+      wrap.appendChild(el("label", { class: "switch" }, [cb, el("span", { class: "track" }), swState, el("span", { class: "lbl", text: f.label })]));
       return wrap;
     }
     wrap.appendChild(el("label", { text: f.label }));
