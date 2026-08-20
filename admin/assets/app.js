@@ -105,7 +105,8 @@
           key: "items", titleKey: "title", addLabel: "Добавить пункт",
           fields: [
             { k: "title", t: "text", label: "Заголовок" },
-            { k: "text", t: "textarea", label: "Текст" }
+            { k: "text", t: "textarea", label: "Текст" },
+            { k: "image", t: "image", pos: "imagePos", ratio: "5/4", label: "Фото пункта" }
           ]
         }}
       ]},
