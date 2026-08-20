@@ -133,7 +133,7 @@
       intro: "Цветовая гамма сайта.",
       cards: [
         { title: "Цвета сайта", icon: "🎨", fields: [
-          { k: "gold", t: "bool", label: "Цветовая гамма сайта", onLabel: "Золотая", offLabel: "Бирюзовая (Tiffany)" }
+          { k: "gold", t: "bool", label: "Цветовая гамма сайта", onLabel: "Оранжевая", offLabel: "Бирюзовая (Tiffany)" }
         ]}
       ]}
   ];
