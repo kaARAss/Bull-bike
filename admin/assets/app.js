@@ -127,6 +127,14 @@
           { k: "maxGroup", t: "text", label: "MAX-группа (ссылка)", half: true },
           { k: "fabPhone", t: "text", label: "Телефон кнопки-звонка" }
         ]}
+      ]},
+
+    { key: "settings", file: "settings.json", title: "Оформление", icon: "🎨",
+      intro: "Цветовая гамма сайта.",
+      cards: [
+        { title: "Цвета сайта", icon: "🎨", fields: [
+          { k: "gold", t: "bool", label: "Золотая гамма (как в MotoGost). Выкл — бирюзовая (Tiffany)" }
+        ]}
       ]}
   ];
 
