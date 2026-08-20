@@ -43,7 +43,7 @@
             { k: "tag", t: "text", label: "Метка", half: true },
             { k: "title", t: "text", label: "Заголовок", half: true },
             { k: "intro", t: "textarea", label: "Описание" },
-            { k: "image", t: "image", pos: "imagePos", ratio: "4/3", label: "Фото формата" },
+            { k: "image", t: "image", pos: "imagePos", ratio: "9/4", label: "Фото формата" },
             { k: "steps", t: "objlist", label: "Шаги", titleKey: "label", addLabel: "Добавить шаг", fields: [
               { k: "label", t: "text", label: "Название шага" },
               { k: "text", t: "textarea", label: "Описание шага" }
@@ -62,7 +62,7 @@
             { k: "price", t: "text", label: "Цена", half: true },
             { k: "specs", t: "text", label: "Характеристики (коротко)" },
             { k: "teaser", t: "textarea", label: "Краткое описание (на карточке)" },
-            { k: "image", t: "image", pos: "imagePos", ratio: "4/3", label: "Фото" },
+            { k: "image", t: "image", pos: "imagePos", ratio: "375/190", label: "Фото" },
             { k: "intro", t: "textarea", label: "Вступление в окне «Подробнее»" },
             { k: "details", t: "strlist", label: "Пункты описания", addLabel: "Добавить пункт" },
             { k: "gallery", t: "gallery", pos: "galleryPos", label: "Фото в окне «Подробнее» (галерея — перетащите фото, чтобы сместить кадр)" }
@@ -89,7 +89,7 @@
           { k: "ctaHref", t: "text", label: "Ссылка кнопки", half: true }
         ]},
         { title: "Фото", icon: "🖼️", fields: [
-          { k: "image", t: "image", pos: "imagePos", ratio: "4/3", label: "Фото блока" }
+          { k: "image", t: "image", pos: "imagePos", ratio: "1/1", label: "Фото блока" }
         ]}
       ]},
 
@@ -362,8 +362,7 @@
       ]),
       el("div", { class: "slider" }, [ el("label", {}, [document.createTextNode("По горизонтали"), sxLbl]), sx ]),
       el("div", { class: "slider" }, [ el("label", {}, [document.createTextNode("По вертикали"), syLbl]), sy ]),
-      el("div", { class: "hint", text: "Превью показывает, как фото ляжет в блоке. Переключайте формат рамки ниже." }),
-      ratioTabs
+      el("div", { class: "hint", text: "Рамка точь-в-точь повторяет пропорции блока на сайте — как подвинете, так и ляжет." })
     ]);
 
     apply();
