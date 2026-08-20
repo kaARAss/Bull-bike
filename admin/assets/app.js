@@ -133,7 +133,7 @@
       intro: "Цветовая гамма сайта.",
       cards: [
         { title: "Цвета сайта", icon: "🎨", fields: [
-          { k: "gold", t: "bool", label: "Золотая тема сайта" }
+          { k: "gold", t: "bool", label: "Цветовая гамма сайта", onLabel: "Золотая", offLabel: "Бирюзовая (Tiffany)" }
         ]}
       ]}
   ];
@@ -231,8 +231,9 @@
     if (f.t === "bool") {
       var cb = el("input", { type: "checkbox" });
       cb.checked = !!obj[f.k];
-      var swState = el("span", { class: "sw-state", text: cb.checked ? "Вкл" : "Выкл" });
-      cb.addEventListener("change", function () { obj[f.k] = cb.checked; swState.textContent = cb.checked ? "Вкл" : "Выкл"; markChanged(); });
+      var onTxt = f.onLabel || "Вкл", offTxt = f.offLabel || "Выкл";
+      var swState = el("span", { class: "sw-state", text: cb.checked ? onTxt : offTxt });
+      cb.addEventListener("change", function () { obj[f.k] = cb.checked; swState.textContent = cb.checked ? onTxt : offTxt; markChanged(); });
       wrap.appendChild(el("label", { class: "switch" }, [cb, el("span", { class: "track" }), swState, el("span", { class: "lbl", text: f.label })]));
       return wrap;
     }
