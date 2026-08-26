@@ -102,7 +102,7 @@
       "specs": "Борд + киль + весло + насос + лиш + рюкзак",
       "teaser": "Тишина, вода, полная перезагрузка головы. Закат с борда — самые светлые эмоции за лето.",
       "price": "от 500 ₽/час",
-      "image": "images/svc_sup.webp",
+      "image": "images/mtaecdv3-gemini_generated_image_h9w6okh9w6okh9w6-compressed.jpeg",
       "intro": "",
       "details": [
         "Час от 2 часов — 500 ₽/час.",
@@ -116,7 +116,8 @@
       ],
       "galleryPos": [
         "50% 50%"
-      ]
+      ],
+      "imagePos": "47% 80%"
     },
     {
       "title": "Прокат лодок",
