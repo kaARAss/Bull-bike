@@ -192,6 +192,9 @@
     }).then(function (r) {
       return r.json().catch(function () { return { ok: false, error: "Пустой ответ сервера (" + r.status + ")" }; })
         .then(function (j) { if (!r.ok || !j.ok) throw new Error(j && j.error ? j.error : "Ошибка " + r.status); return j; });
+    }).catch(function (e) {
+      if (e instanceof TypeError) throw new Error("Сервер недоступен (Failed to fetch). Проверьте, что Cloud Function запущена и публична в Yandex Cloud, а размер файла не превышает лимит запроса (~3,5 МБ).");
+      throw e;
     });
   }
 
@@ -612,7 +615,7 @@
       renderSection(SECTIONS.find(function (s) { return s.key === state.active; }));
       toast("Сохранено (" + (res.saved || changes.length) + " файл.). Сайт обновится через 1–2 мин.", "ok", "Готово");
     }).catch(function (e) {
-      toast(String(e.message || e), "err", "��шибка сохранения");
+      toast(String(e.message || e), "err", "Ошибка сохранения");
       if (/Сессия истекла/i.test(String(e.message))) { setTimeout(logout, 1200); }
     }).then(function () { btn.disabled = false; btn.innerHTML = old; });
   }
