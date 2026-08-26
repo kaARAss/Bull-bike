@@ -148,7 +148,7 @@
       "specs": "Suzuki 2.5 л.с. · 9.9 л.с.",
       "teaser": "Есть своя лодка — бери только мотор. Тихий 4-тактный для рыбалки или бодрый 9,9 л.с. для дальних точек.",
       "price": "от 1 000 ₽/день",
-      "image": "images/svc_motor.webp",
+      "image": "images/mtaen5cu-gemini_generated_image_lgo67hlgo67hlgo6-compressed.jpeg",
       "intro": "",
       "details": [
         "Suzuki 2,5 л.с.: будни — 1 000 ₽, выходные — 1 200 ₽, неделя — 5 000 ₽. Залог 5 000 ₽.",
@@ -156,11 +156,14 @@
         "Документ обязателен."
       ],
       "gallery": [
+        "images/mtaencg4-rzcw-gemini_generated_image_lgo67hlgo67hlgo6-compressed.jpeg",
         "images/svc_motor.webp"
       ],
       "galleryPos": [
+        "50% 50%",
         "50% 50%"
-      ]
+      ],
+      "imagePos": "48% 75%"
     },
     {
       "title": "Обучение с нуля",
