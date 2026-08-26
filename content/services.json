@@ -126,7 +126,7 @@
       "specs": "Лодка на вёслах · вёсла включены",
       "teaser": "Свобода на воде: своё направление, свой темп, рыбалка на рассвете или закат с термосом.",
       "price": "от 1 000 ₽/день",
-      "image": "images/svc_boat.webp",
+      "image": "images/mtaemp6k-gemini_generated_image_6c4cja6c4cja6c4c-compressed.jpeg",
       "intro": "",
       "details": [
         "Будний день — 1 000 ₽, выходной день — 1 200 ₽, неделя — 5 000 ₽.",
@@ -134,11 +134,14 @@
         "Залог 5 000 ₽ + документ."
       ],
       "gallery": [
+        "images/mtaemldo-2wki-gemini_generated_image_6c4cja6c4cja6c4c-compressed.jpeg",
         "images/svc_boat.webp"
       ],
       "galleryPos": [
+        "50% 50%",
         "50% 50%"
-      ]
+      ],
+      "imagePos": "48% 73%"
     },
     {
       "title": "Прокат лодочных моторов",
